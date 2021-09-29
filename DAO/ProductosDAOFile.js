@@ -1,27 +1,35 @@
-const Productos = require('../api/productos')
-const fs = require('fs/promises')
+const IProductosDAO = require('./IProductosDAO');
+const ProductoDTO = require('../DTO/ProductosDTO');
 
-class Archivo {
+class ProductoFileDAO extends IProductosDAO {
 
     constructor() {
-        this.pathArchivo = '../productos.txt';
+        super();
     }
 
     async listar() {
         try {
             let lecturaArchivo = await fs.promises.readFile(this.pathArchivo, 'utf-8');
             let productos = JSON.parse(lecturaArchivo)
-            console.log(productos)
             return productos
         } catch {
             console.log([])
             return []
-        }
+        };
+    }
 
+    async listarPorId(id) {
+        try {
+            let listaProductos = await fs.promises.readFile(this.pathArchivo, 'utf-8');
+            let productos = JSON.parse(listaProductos);
+            return productos[id];
+        } catch {
+            throw new Error('No se pudo encontrar el archivo')
+        }
     }
 
     async guardar(producto) {
-        let leidos = await this.leer()
+        let leidos = await this.listar()
         producto.id = leidos.length + 1
         leidos.push(producto)
 
@@ -30,21 +38,20 @@ class Archivo {
         } catch {
             throw new Error('No se pudo guardar un nuevo producto')
         }
-
     }
 
-    async actualizar(idProducto, nuevoProducto) {
+    async actualizar(id, nuevoProducto) {
         try {
             let archivoLeido = await fs.promises.readFile(this.pathArchivo, 'utf-8');
             let archivoActualizado = JSON.parse(archivoLeido);
-            archivoActualizado[idProducto] = nuevoProducto
+            archivoActualizado[id] = nuevoProducto
             await fs.promises.writeFile(this.pathArchivo, JSON.stringify(archivoActualizado, null, '\t'));
         } catch {
             throw new Error('No se pudo actualizar el archivo')
         }
     }
 
-    async borrar(idProducto) {
+    async borrar(id) {
         try {
             let archivoLeido = await fs.promises.readFile(this.pathArchivo, 'utf-8');
             let archivoActualizado = archivoLeido.splice(idProducto, 1)
@@ -56,4 +63,5 @@ class Archivo {
     }
 }
 
-module.exports = Archivo;
+module.exports = ProductoMongoDAO;
+
