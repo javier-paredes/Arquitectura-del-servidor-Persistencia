@@ -25,4 +25,4 @@ borrar --> elimina un producto que exista en la base de datos ingresando paramet
 
 EJEMPLO:
 
-$ node pruebasDAO.js -cmd actualizar --id 60ed7758186ecd099113a482 --title Actualizacion --price 42 --thumbnail asd.jpg
+$ node pruebasDAO.js --cmd actualizar --id 60ed7758186ecd099113a482 --title Actualizacion --price 42 --thumbnail asd.jpg
