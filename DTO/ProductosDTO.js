@@ -1,14 +1,20 @@
 class ProductoDTO {
 
     constructor(productoData) {
-        this.id = productoData._id;
+        this.idMongo = productoData._id;
+        this.id = productoData.id;
         this.title = productoData.title;
         this.price = productoData.price;
         this.thumbnail = productoData.thumbnail;
+        this.timestamp = new Date().toLocaleString();
+    }
+
+    getIdMongo() {
+        return this.idMongo;
     }
 
     getId() {
-        return this.id;
+        return this.Id;
     }
 
     getNombre() {

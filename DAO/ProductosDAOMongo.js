@@ -31,4 +31,4 @@ class ProductoMongoDAO extends IProductosDAO {
     }
 }
 
-module.exports = ProductoMongoDAO;
+module.exports = new ProductoMongoDAO();
