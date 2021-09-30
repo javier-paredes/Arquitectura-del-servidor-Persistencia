@@ -26,3 +26,8 @@ borrar --> elimina un producto que exista en la base de datos ingresando paramet
 EJEMPLO:
 
 $ node pruebasDAO.js --cmd actualizar --id 60ed7758186ecd099113a482 --title Actualizacion --price 42 --thumbnail asd.jpg
+
+<hr>
+
+En la carpeta config, archivo config, se puede cambiar la persistencia que se quiera usar.
+Se puede elegir entre persistencia ' Mongo ' y ' File ' que usarán Mongo local y File system respectivamente
